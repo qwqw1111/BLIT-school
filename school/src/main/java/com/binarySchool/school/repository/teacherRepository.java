@@ -1,11 +1,11 @@
 package com.binarySchool.school.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.binarySchool.school.entity.Teacher;
 
 @Repository
-public interface teacherRepository extends CrudRepository<Teacher, Long> {
+public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
 }

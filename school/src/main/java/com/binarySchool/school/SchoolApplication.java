@@ -12,15 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.binarySchool.school.entity.Student;
 import com.binarySchool.school.entity.Teacher;
-import com.binarySchool.school.repository.studentRepository;
-import com.binarySchool.school.repository.teacherRepository;
+import com.binarySchool.school.repository.StudentRepository;
+import com.binarySchool.school.repository.TeacherRepository;
 
 @SpringBootApplication
 public class SchoolApplication implements CommandLineRunner{
 	@Autowired
-	private studentRepository studentRepo;
+	private StudentRepository studentRepo;
 	@Autowired
-	private teacherRepository teacherRepo;
+	private TeacherRepository teacherRepo;
 	
 	public static final Logger logger = (Logger) LoggerFactory.getLogger(SchoolApplication.class);
 	

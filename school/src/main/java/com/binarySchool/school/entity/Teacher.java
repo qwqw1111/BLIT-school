@@ -9,7 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Teacher {
 	private String firstName,lastName;
 	@Id
@@ -17,6 +21,7 @@ public class Teacher {
 	private Long id;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="teacher")
+	@JsonIgnore
 	private List<Student> students;
 
 	public Teacher() {
@@ -53,13 +58,16 @@ public class Teacher {
 		this.id = id;
 	}
 
+	/*
 	public List<Student> getStudents() {
 		return students;
 	}
+	*/
 
+	/*
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
-	
+	*/
 	
 }

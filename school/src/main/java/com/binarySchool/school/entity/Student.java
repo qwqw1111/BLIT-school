@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Student {
-	private String firstName, lastName;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	private String firstName, lastName;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Teacher teacher;
