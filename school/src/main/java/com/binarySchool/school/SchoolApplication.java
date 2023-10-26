@@ -10,8 +10,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.binarySchool.school.entity.Course;
 import com.binarySchool.school.entity.Student;
 import com.binarySchool.school.entity.Teacher;
+import com.binarySchool.school.repository.CourseRepository;
 import com.binarySchool.school.repository.StudentRepository;
 import com.binarySchool.school.repository.TeacherRepository;
 
@@ -21,6 +23,8 @@ public class SchoolApplication implements CommandLineRunner{
 	private StudentRepository studentRepo;
 	@Autowired
 	private TeacherRepository teacherRepo;
+	@Autowired
+	private CourseRepository courseRepo;
 	
 	public static final Logger logger = (Logger) LoggerFactory.getLogger(SchoolApplication.class);
 	
@@ -34,9 +38,12 @@ public class SchoolApplication implements CommandLineRunner{
 		Teacher t = new Teacher("Susan","Anthony");
 		teacherRepo.save(t);
 		
+		Course c = new Course("Algebra 1", t);
+		courseRepo.save(c);
+		
 		List<Student> st = Arrays.asList(
-				new Student("Jane","Doe",t),
-				new Student("John","Smith",t)
+				new Student("Jane","Doe",Arrays.asList(c)),
+				new Student("John","Smith",Arrays.asList(c))
 				);
 		studentRepo.saveAll(st);
 		

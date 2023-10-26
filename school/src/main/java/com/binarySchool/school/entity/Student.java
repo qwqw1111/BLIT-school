@@ -1,14 +1,21 @@
 package com.binarySchool.school.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -16,20 +23,25 @@ public class Student {
 	
 	private String firstName, lastName;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Teacher teacher;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Course> courses;
 
 	public Student() {
 		
 	}
 	
-	
-	
-	public Student(String firstName, String lastName, Teacher teacher) {
+	public Student(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.teacher = teacher;
+	}
+	
+	public Student(String firstName, String lastName, List<Course> courses) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.courses = courses;
 	}
 
 
@@ -58,14 +70,16 @@ public class Student {
 		this.id = id;
 	}
 
-	public Teacher getTeacher() {
-		return teacher;
+	/*
+	
+	public List<Course> getCourses() {
+		return courses;
 	}
 
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
-	
+	*/
 	
 	
 }

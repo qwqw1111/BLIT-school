@@ -36,11 +36,12 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student updateStudent(Student s) {
 		// TODO Auto-generated method stub
+		//any reason not to do this?
+		//return studentRepo.save(s);
 		Student st = findStudentById(s.getId());
 		st.setFirstName(s.getFirstName());
 		st.setLastName(s.getLastName());
-		s.setTeacher(s.getTeacher());
-		studentRepo.save(s);
+		studentRepo.save(st);
 		return st;
 	}
 
