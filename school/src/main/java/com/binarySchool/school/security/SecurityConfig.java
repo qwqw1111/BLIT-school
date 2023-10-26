@@ -19,9 +19,38 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain handler(HttpSecurity http) throws Exception {
-		return http.authorizeHttpRequests()
+		return http.csrf().disable()
+				.authorizeHttpRequests()
 				.mvcMatchers(HttpMethod.GET, "/api/v1/student/students")
+				.hasAnyRole("STUDENT","TEACHER","ADMIN")
+				
+				.mvcMatchers(HttpMethod.POST, "/api/v1/student")
+				.hasAnyRole("STUDENT","ADMIN")
+				
+				.mvcMatchers(HttpMethod.POST, "/api/v1/course")
 				.hasAnyRole("TEACHER","ADMIN")
+				
+				.mvcMatchers(HttpMethod.POST, "/api/v1/teacher")
+				.hasAnyRole("TEACHER","ADMIN")
+				
+				.mvcMatchers(HttpMethod.PUT, "/api/v1/teacher/id/{id}")
+				.hasAnyRole("ADMIN")
+				
+				.mvcMatchers(HttpMethod.PUT, "/api/v1/student/id/{id}")
+				.hasAnyRole("ADMIN")
+				
+				.mvcMatchers(HttpMethod.PUT, "/api/v1/course/id/{id}")
+				.hasAnyRole("TEACHER","ADMIN")
+				
+				.mvcMatchers(HttpMethod.DELETE, "/api/v1/teacher/id/{id}")
+				.hasAnyRole("ADMIN")
+				
+				.mvcMatchers(HttpMethod.DELETE, "/api/v1/student/id/{id}")
+				.hasAnyRole("ADMIN")
+				
+				.mvcMatchers(HttpMethod.DELETE, "/api/v1/course/id/{id}")
+				.hasAnyRole("TEACHER","ADMIN")
+				
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().httpBasic()
 				.and().build();
